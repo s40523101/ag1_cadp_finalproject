@@ -54,7 +54,7 @@
 <v t="yen.20170429215830.1"><vh>機械系統模擬</vh></v>
 <v t="yen.20170429215802.1"><vh>演化運算</vh></v>
 </v>
-<v t="yen.20170429215922.1"><vh>@clean leo_editor.md</vh>
+<v t="yen.20170429215922.1" a="E"><vh>@clean leo_editor.md</vh>
 <v t="yen.20170429220001.1"><vh>Scripting</vh></v>
 </v>
 <v t="yen.20170429220128.1"><vh>@clean github.md</vh>
@@ -89,7 +89,7 @@ os.chdir("./../markdown")
 
 # 若在 Linux 環境則使用 ukai.ttc 系統字形
 if platform.system().lower()=="linux": font = "ukai.ttc"
-# 在 windows 環境使用 SimSun 系統字形
+# 在 windows 環境使用 SimSun 字形
 elif platform.system().lower()=="windows": font = "SimSun"
 else: font = "Arial"
 fontsize = "12"
@@ -115,22 +115,17 @@ chapter_list = " ".join("./paragraph/" + i for i in [
 #"pyduino.md", 
 ])
 
-g.es("請注意!納入的檔案如下:")
-g.es(" ".join(i  + "\n" for i in chapter_list))
-
 # 若系統並未正確轉檔, 可以將 os.system 改為 g.es 表示要使用 Leo Editor 的 global 物件中的 echo string 將指令印在 log 區
 # 然後複製指令, 然後在命令列視窗中的 markdown 目錄中執行, 就可以得到錯誤訊息
 # 或許可以再從 https://stackoverflow.com/questions/26005583/return-value-of-x-os-system 中的建議改進此一指令
-if os.system("pandoc cover_and_abstract.md " + chapter_list + " reference.md -o ../pdf/report.pdf {}".format(settingFlag)):
-    g.es("PDF 轉換完畢")
-else:
-    g.es("PDF 轉換錯誤, 以下為所執行的指令")
-    g.es("pandoc cover_and_abstract.md " + chapter_list + " reference.md -o ../pdf/report.pdf {}".format(settingFlag))
+os.system("pandoc cover_and_abstract.md " + chapter_list + " reference.md -o ../pdf/report.pdf {}".format(settingFlag))
+g.es("PDF 轉換完畢")
 print('-'*12)</t>
 <t tx="ahshoe.20161120121808.1"></t>
 <t tx="ahshoe.20161120122151.1">---
 university_zh: '國立虎尾科技大學'
 institute_zh: '機械設計工程系'
+category_zh: '電腦輔助設計實習 bg1 期末報告'
 title_zh: '從概念-知識理論看電腦網路、機械設計與協同'
 title_en: 'Computer Network、Mechanical Design and Collaboration in C-K Theory'
 author:
