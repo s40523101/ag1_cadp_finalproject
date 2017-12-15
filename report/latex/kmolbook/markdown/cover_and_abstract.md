@@ -1,15 +1,15 @@
 ---
 university_zh: '國立虎尾科技大學'
 institute_zh: '機械設計工程系'
-title_zh: '電腦網路、機械設計與協同'
-title_en: 'Computer Network、Mechanical Design and Collaboration'
+title_zh: '從概念-知識理論看電腦網路、機械設計與協同'
+title_en: 'Computer Network、Mechanical Design and Collaboration in C-K Theory'
 author:
-- 設計三乙 123 同學
-- 設計三乙 456 同學
-- 設計三乙 556 同學
-- 設計三乙 XXX 同學
-advisor_zh: '嚴家銘'
-date: '中華民國 106 年 7 月'
+- 設計二乙 秦九韶 同學
+- 設計二乙 李治 同學
+- 設計二乙 楊輝 同學
+- 設計二乙 朱世傑 同學
+advisor_zh: 'Dr. Scrum'
+date: '20171215'
 ---
 
 ---

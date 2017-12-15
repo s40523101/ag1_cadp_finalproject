@@ -19,9 +19,6 @@
 <v t="leo.20171119233845.1"><vh>fontspec error</vh></v>
 </v>
 <v t="40323230.20170123213451.1"><vh>@button Report pdf</vh></v>
-<v t="leo.20171119234847.1" a="E"><vh>章節順序</vh>
-<v t="yen.20170429220829.1"><vh>@edit chapter.py</vh></v>
-</v>
 <v t="yen.20170429132400.1"><vh>協同著作規劃</vh></v>
 <v t="yen.20170429103742.1" a="E"><vh>@path ./../</vh>
 <v t="yen.20170429103940.1" a="E"><vh>@path markdown</vh>
@@ -35,7 +32,7 @@
 </v>
 <v t="leo.20171119234822.1" a="E"><vh>各章節內容</vh>
 <v t="yen.20170429214845.1" a="E"><vh>@path paragraph</vh>
-<v t="yen.20170429214838.1"><vh>@clean computer_hardware.md</vh>
+<v t="yen.20170429214838.1" a="E"><vh>@clean computer_hardware.md</vh>
 <v t="yen.20170429214838.3"><vh>電腦硬體</vh></v>
 </v>
 <v t="yen.20170429215041.1" a="E"><vh>@clean operating_system.md</vh>
@@ -81,17 +78,18 @@
 <v t="ahshoe.20170129120858.1"><vh>@edit README.md</vh></v>
 </v>
 </v>
-<v t="leo.20171214154539.1"><vh>Found All:[Kmol]</vh></v>
-<v t="leo.20171214154642.1"><vh>Found All:[Kmol]</vh></v>
 </vnodes>
 <tnodes>
 <t tx="40323230.20170123213451.1">@language python
 filename = "report"
 import os, platform
 import chapter
+# 更換目錄到 markdown 
 os.chdir("./../markdown")
 
+# 若在 Linux 環境則使用 ukai.ttc 系統字形
 if platform.system().lower()=="linux": font = "ukai.ttc"
+# 在 windows 環境使用 SimSun 系統字形
 elif platform.system().lower()=="windows": font = "SimSun"
 else: font = "Arial"
 fontsize = "12"
@@ -99,9 +97,9 @@ margin = "1in"
 settingFlag = "--pdf-engine=xelatex -V lang=zh-TW -N --toc --highlight-style kate -V documentclass=report  --filter pandoc-fignos --filter pandoc-tablenos --template=template.tex -V \"CJKmainfont:{0}\" -V fontsize={1}pt -V geometry:margin={2} --bibliography=refer.bib --csl=ieee.csl".format(font, fontsize, margin)
 print("---Pandoc---")
 
-# get chapter sequence
-chapter_list = " ".join("./paragraph/"+i for i in [
-#"computer_hardware.md",
+# 選擇所要納入的 Markdown 檔案, 不納入的檔案名稱前方加上  # 即可
+chapter_list = " ".join("./paragraph/" + i for i in [
+"computer_hardware.md",
 "operating_system.md", 
 "computer_network.md", 
 "computer_programming.md", 
@@ -116,25 +114,32 @@ chapter_list = " ".join("./paragraph/"+i for i in [
 #"pylinkage.md", 
 #"pyduino.md", 
 ])
-    
-g.es(chapter_list)
 
-os.system("pandoc cover_and_abstract.md " + chapter_list + " reference.md -o ../pdf/report.pdf {}".format(settingFlag))
-g.es("PDF 轉換完畢")
+g.es("請注意!納入的檔案如下:")
+g.es(" ".join(i  + "\n" for i in chapter_list))
+
+# 若系統並未正確轉檔, 可以將 os.system 改為 g.es 表示要使用 Leo Editor 的 global 物件中的 echo string 將指令印在 log 區
+# 然後複製指令, 然後在命令列視窗中的 markdown 目錄中執行, 就可以得到錯誤訊息
+# 或許可以再從 https://stackoverflow.com/questions/26005583/return-value-of-x-os-system 中的建議改進此一指令
+if os.system("pandoc cover_and_abstract.md " + chapter_list + " reference.md -o ../pdf/report.pdf {}".format(settingFlag)):
+    g.es("PDF 轉換完畢")
+else:
+    g.es("PDF 轉換錯誤, 以下為所執行的指令")
+    g.es("pandoc cover_and_abstract.md " + chapter_list + " reference.md -o ../pdf/report.pdf {}".format(settingFlag))
 print('-'*12)</t>
 <t tx="ahshoe.20161120121808.1"></t>
 <t tx="ahshoe.20161120122151.1">---
 university_zh: '國立虎尾科技大學'
 institute_zh: '機械設計工程系'
-title_zh: '電腦網路、機械設計與協同'
-title_en: 'Computer Network、Mechanical Design and Collaboration'
+title_zh: '從概念-知識理論看電腦網路、機械設計與協同'
+title_en: 'Computer Network、Mechanical Design and Collaboration in C-K Theory'
 author:
-- 設計三乙 123 同學
-- 設計三乙 456 同學
-- 設計三乙 556 同學
-- 設計三乙 XXX 同學
-advisor_zh: '嚴家銘'
-date: '中華民國 106 年 7 月'
+- 設計二乙 秦九韶 同學
+- 設計二乙 李治 同學
+- 設計二乙 楊輝 同學
+- 設計二乙 朱世傑 同學
+advisor_zh: 'Dr. Scrum'
+date: '20171215'
 ---
 
 @others
@@ -239,74 +244,6 @@ c:\users\cadlab\desktop\mde\python2017fall_36\data\miktex_portable\miktex-portab
 <t tx="leo.20171119233845.1">https://sourceforge.net/p/miktex/discussion/33790/thread/fcf98fa1/</t>
 <t tx="leo.20171119234752.1"></t>
 <t tx="leo.20171119234822.1"></t>
-<t tx="leo.20171119234847.1"></t>
-<t tx="leo.20171214154539.1"># ignore-case, head, body
---------------------Windows
-body: ![Kmol][]
-
---------------------Windows
-body: [Kmol]: ./images/operating_system/kmol.png {#fig:駱駝}
-
---------------------Ubuntu
-body: ![Kmol][]
-
---------------------Ubuntu
-body: [Kmol]: ./images/operating_system/kmol.png {#fig:駱駝}
-
---------------------IPv4
-body: ![Kmol][]
-
---------------------IPv4
-body: [Kmol]: ./images/computer_network/kmol.png {#fig:駱駝}
-
---------------------IPv6
-body: ![Kmol][]
-
-</t>
-<t tx="leo.20171214154642.1"># ignore-case, head, body
---------------------Windows
-body: ![Kmol][]
-
---------------------Ubuntu
-body: ![Kmol][]
-
---------------------Ubuntu
-body: [Kmol]: ./images/operating_system/kmol.png {#fig:駱駝}
-
---------------------IPv4
-body: ![Kmol][]
-
---------------------IPv4
-body: [Kmol]: ./images/computer_network/kmol.png {#fig:駱駝}
-
---------------------IPv6
-body: ![Kmol][]
-
---------------------Found All:[Kmol]
-head: Found All:[Kmol]
-
---------------------Found All:[Kmol]
-body: body: ![Kmol][]
-
---------------------Found All:[Kmol]
-body: body: [Kmol]: ./images/operating_system/kmol.png {#fig:駱駝}
-
---------------------Found All:[Kmol]
-body: body: ![Kmol][]
-
---------------------Found All:[Kmol]
-body: body: [Kmol]: ./images/operating_system/kmol.png {#fig:駱駝}
-
---------------------Found All:[Kmol]
-body: body: ![Kmol][]
-
---------------------Found All:[Kmol]
-body: body: [Kmol]: ./images/computer_network/kmol.png {#fig:駱駝}
-
---------------------Found All:[Kmol]
-body: body: ![Kmol][]
-
-</t>
 <t tx="yen.20170429103742.1"></t>
 <t tx="yen.20170429103940.1"></t>
 <t tx="yen.20170429110328.1"></t>
